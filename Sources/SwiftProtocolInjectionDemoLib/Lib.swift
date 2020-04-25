@@ -1,15 +1,31 @@
 public protocol P {
-    var message: String { get }
+    static var message: String { get }
 }
 
-public struct S {
-    public init() {}
+public enum A {}
+public enum B {}
+public enum C {}
+
+extension P {
+    public static var message: String { "default message" }
 }
 
 public func lib() {
-    if let p = S() as? P {
+    if let p = A.self as? P.Type {
         print(p.message)
     } else {
-        print("s it not P")
+        print("A is not P")
+    }
+
+    if let p = B.self as? P.Type {
+        print(p.message)
+    } else {
+        print("B is not P")
+    }
+
+    if let p = C.self as? P.Type {
+        print(p.message)
+    } else {
+        print("C is not P")
     }
 }
